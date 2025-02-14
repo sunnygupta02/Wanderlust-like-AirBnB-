@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 let port =8080;
 const mongoose=require("mongoose");
+const Listing=require("./models/listing.js")
 
 
 async function main(){
@@ -23,4 +24,19 @@ app.listen(port,()=>{
 
 app.get("/",(req,res)=>{
     res.send("hi working");
+})
+
+app.get("/testinglist", async (req,res)=>{
+    
+    //creating new object or document
+    let samplelisting=new Listing({
+        title:"my room",
+        description:"in usa",
+        price:1222,
+        location:"washington dc",
+        country:"usa"
+    })
+  await  samplelisting.save();
+  console.log("sample was saved");
+  res.send("sucess")
 })
