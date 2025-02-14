@@ -1,0 +1,25 @@
+{
+  "name": "majorproject",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnygupta02/Wanderlust-like-AirBnB-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunnygupta02/Wanderlust-like-AirBnB-/issues"
+  },
+  "homepage": "https://github.com/sunnygupta02/Wanderlust-like-AirBnB-#readme",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.1"
+  }
+}
