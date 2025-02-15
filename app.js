@@ -103,6 +103,14 @@ res.redirect("/listings");
 })
 
 
+//delete route
+app.delete("/listings/:id",async(req,res)=>{
+    let {id}=req.params;
+    let listtobedeleted=await Listing.findByIdAndDelete(id);
+    console.log("list is deleted")
+    res.redirect("/listings");
+})
+
 
 //show route
 app.get("/listings/:id",async (req,res)=>{
