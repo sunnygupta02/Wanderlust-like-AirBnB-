@@ -47,13 +47,38 @@ app.get("/",(req,res)=>{
 //   res.send("sucess")
 // })
 
+
+//index route
 app.get("/listings",async (req,res)=>{
   const alllistings= await Listing.find({});
   res.render("listings/index.ejs",{alllistings});
 })
 
+
+//new route
 app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs")
+})
+
+
+//to insert the new data in db
+app.post("/listings",(req,res)=>{
+    let{title,description,image,price,location,country}=req.body;
+    let newlist=new Listing({
+        title:title,
+        description:description,
+        image:image,
+        price:price,
+        location:location,
+        country:country
+    })
+    newlist.save().then((res)=>{
+        console.log(res);
+    }).catch((err)=>{
+        console.log(err);
+    })
+    res.redirect("/listings");
+
 })
 
 
