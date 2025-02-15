@@ -4,6 +4,7 @@ let port =8080;
 const mongoose=require("mongoose");
 const Listing=require("./models/listing.js")
 const path=require("path");
+const methodOverride=require("method-override")
 
 
 
@@ -27,6 +28,8 @@ app.listen(port,()=>{
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true})) //to parse data coming from data.js
+app.use(methodOverride("_method"))
+
 
 app.get("/",(req,res)=>{
     res.send("hi working");
@@ -61,7 +64,7 @@ app.get("/listings/new",(req,res)=>{
 })
 
 
-//to insert the new data in db
+//to insert the new data in db// create route
 app.post("/listings",(req,res)=>{
     let{title,description,image,price,location,country}=req.body;
     let newlist=new Listing({
@@ -81,6 +84,23 @@ app.post("/listings",(req,res)=>{
 
 })
 
+//edit route
+app.get("/listings/:id/edit",async(req,res)=>{
+    let {id}=req.params;
+    const listing= await Listing.findById(id);
+    res.render("listings/edit.ejs",{listing});
+})
+
+
+//update route
+app.put("/listings/:id", (req,res)=>{
+    let {id}=req.params;
+   
+    Listing.findByIdAndUpdate(id,{...req.body.listing}).then((res)=>{
+        console.log(res);
+    })
+res.redirect("/listings");
+})
 
 
 
